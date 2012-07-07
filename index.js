@@ -37,14 +37,14 @@ module.exports = function () {
     var cb = opts.cb;
     
     if (stream.in === process.stdin) {
-        tty.setRawMode(true);
+        process.stdin.setRawMode(true);
     }
     
     var line = '';
     stream.in.on('data', function ondata (buf) {
         function finish () {
             if (stream.in === process.stdin) {
-                tty.setRawMode(false);
+                process.stdin.setRawMode(false);
             }
             if (stream.in.pause) stream.in.pause();
             stream.in.removeListener('data', ondata);
